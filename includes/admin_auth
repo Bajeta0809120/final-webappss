@@ -1,0 +1,17 @@
+<?php
+require_once 'session_helper.php';
+
+function requireAdmin() {
+    initSession();
+    
+    if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in'] || !isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
+        header("Location: /CMS/index.php?error=unauthorized");
+        exit();
+    }
+}
+
+function isAdmin() {
+    initSession();
+    return isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] && isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
+}
+?>
